@@ -1,33 +1,28 @@
 package EntidadesProduto;
 
 public class Doce extends Produto {
-	private String marca;
+    private String marca;
 
-	
+    public Doce(String nome, double valor, int quantidade, String marca) {
+        super(nome, valor, quantidade);
+        this.marca = marca;
+    }
 
-	public Doce(String nome, double valor, String marca,int quantidade) {
-		super(nome, valor, quantidade);
-		this.marca = marca;
-	}
+    public String getTipo() {
+        return marca;
+    }
 
-	public String getMarca() {
-		return marca;
-	}
+    public void setTipo(String marca) {
+        this.marca = marca;
+    }
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	@Override
-	public double ValorUnitario() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public void mostrarItem() {
-		// TODO Auto-generated method stub
-		System.out.println("Nome: "+this.getNome()+" Preço: "+this.getValor()+" Nome da Marca: "+this.getMarca());
-		
-	}
-	
+    @Override
+    public void imprimirInformacoes() {
+		System.out.println("-------------------------------------------");
+        System.out.println("Doce: " + getNome());
+        System.out.println("Tipo: " + marca);
+        System.out.println("Valor: R$" + getValor());
+        System.out.println("Quantidade: " + getQuantidade());
+		System.out.println("-------------------------------------------");
+    }
 }

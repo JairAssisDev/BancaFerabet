@@ -1,33 +1,29 @@
 package EntidadesProduto;
 
 public class Revista extends Produto {
-	private String editora;
+    private int numeroEdicao;
 
+    public Revista(String nome, double valor, int quantidade, int numeroEdicao) {
+        super(nome, valor, quantidade);
+        this.numeroEdicao = numeroEdicao;
+    }
 
-	public Revista(String nome, double valor, String editora,int quantidade) {
-		super(nome, valor, quantidade);
-		this.editora = editora;
-	}
+    public int getNumeroEdicao() {
+        return numeroEdicao;
+    }
 
-	public String getEditora() {
-		return editora;
-	}
+    public void setNumeroEdicao(int numeroEdicao) {
+        this.numeroEdicao = numeroEdicao;
+    }
 
-	public void setEditora(String editora) {
-		this.editora = editora;
-	}
+    @Override
+    public void imprimirInformacoes() {
+		System.out.println("-------------------------------------------");
+        System.out.println("Revista: " + getNome());
+        System.out.println("Edição: " + numeroEdicao);
+        System.out.println("Valor: R$" + getValor());
+        System.out.println("Quantidade: " + getQuantidade());		
+        System.out.println("-------------------------------------------");
 
-	@Override
-	public double ValorUnitario() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void mostrarItem() {
-		// TODO Auto-generated method stub
-		System.out.println("Nome: "+this.getNome()+" Preço: "+this.getValor()+" Nome da Editora: "+this.getEditora());
-		
-	}
-	
+    }
 }

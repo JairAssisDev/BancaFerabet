@@ -1,33 +1,30 @@
 package EntidadesProduto;
 
 public class Bebida extends Produto {
-	private String tipo;
+    private String tipo;
 
+    public Bebida(String nome, double valor, int quantidade, String tipo) {
+        super(nome, valor, quantidade);
+        this.tipo = tipo;
+    }
 
+    public String getMarca() {
+        return tipo;
+    }
 
-	public Bebida(String nome, double valor, String tipo,int quantidade) {
-		super(nome, valor,quantidade);
-		this.tipo = tipo;
-	}
+    public void setMarca(String tipo) {
+        this.tipo = tipo;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    @Override
+    public void imprimirInformacoes() {
+		System.out.println("-------------------------------------------");
+        System.out.println("Bebida: " + getNome());
+        System.out.println("Marca: " + tipo);
+        System.out.println("Valor: R$" + getValor());
+        System.out.println("Quantidade: " + getQuantidade());
+		System.out.println("-------------------------------------------");
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	@Override
-	public double ValorUnitario() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public void mostrarItem() {
-		// TODO Auto-generated method stub
-		System.out.println("Nome: "+this.getNome()+" Preço: "+this.getValor()+" Tipo da bebida: "+this.getTipo());
-		
-	}
-	
+    }
 }
+

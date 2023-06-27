@@ -1,5 +1,6 @@
 package AppPrincipal;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,10 +20,11 @@ public class AppPrincipal {
 		// TODO Auto-generated method stub
 
 		
+		Produto produto1 = new Bebida("pitu", 10.50, 10, "alcoólico");
+		Produto produto2 = new Doce("bombom", 33.3, 10, "nestle");
+		Produto produto3 = new Revista("veja", 20.20, 10, 4);
+
 		
-		Produto produto1 = new Bebida( "pitu",10.50, "alcolico",10);
-		Produto produto2 = new Doce( "bombom",33.3 ,"nestle",10);
-		Produto produto3 = new Revista("veja",20.20, "palmares",10);
 		
 		produtos.add(produto1);
 		produtos.add(produto2);
@@ -45,7 +47,8 @@ public class AppPrincipal {
 		System.out.println("-------------------------------------------------------");
 		System.out.println("|             Opção 1 - Sistema de Cadastrar          |");
 		System.out.println("|             Opção 2 - Listar Itens                  |");
-		System.out.println("|             Opção 3 - Comprar Itens                  |");
+		System.out.println("|             Opção 3 - Comprar Itens                 |");
+		System.out.println("|             Opção 4 - Remover Itens do Cadastro     |");
 		System.out.println("|             Opção 0 - Sair do Programa              |");
 		String opcao = input.next();
 		if(opcao.equals("1")) {
@@ -70,6 +73,8 @@ public class AppPrincipal {
 				listaProdutos(x);
 			}else if(x.equals("4")) {
 				listaProdutos(x);
+			}else if(x.equals("0")) {
+				menu();
 			}
 			else {
 				
@@ -81,12 +86,16 @@ public class AppPrincipal {
 		if(opcao.equals("3")) {
 			compra();
 		}
+		if(opcao.equals("4")) {
+			removerDoCadastro();
+		}
 		if(opcao.equals("0")) {
 			System.out.println("-------------------------------------------------------");
 			System.out.println("---------------Sistema de Banca FeraBet----------------");
 			System.out.println("-------------------------------------------------------");
 			System.out.println("**********************Volte sempre*********************");
 			System.out.println("-------------------------------------------------------");
+			System.exit(0);
 		}
 		else {
 			System.out.println("opção invalida!!");
@@ -103,7 +112,6 @@ public class AppPrincipal {
 		System.out.println("|     Opção 2 - Cadastrar Doce              |");
 		System.out.println("|     Opção 3 - Cadastrar Revista           |");
 		System.out.println("|     Opção 0 - Voltar para o menu          |");
-
 		String opcao = input.next();
 		
 		System.out.println(opcao);
@@ -125,7 +133,7 @@ public class AppPrincipal {
 			menu();
 			break;
 		default:
-			System.out.println("opção invalida!!");
+			
 			menu();
 			break;
 		}
@@ -134,80 +142,86 @@ public class AppPrincipal {
 	
 	}
 	private static void cadastraBebida() {
-		
-		System.out.println("Digite o nome do produto: ");
-		String nome = input.nextLine();
-		input.nextLine();
-		System.out.println("Digite O valor do produto: ");
-		String valorStr = input.next();
+	    System.out.println("Digite o nome do produto: ");
+	    String nome = input.next();
+	    System.out.println("Digite o valor do produto: ");
+	    String valorStr = input.next();
 	    double valor = Double.parseDouble(valorStr);
-		System.out.println("Digite o tipo da bebida");
-		String tipo = input.next();
-		System.out.println("Digite a quantidade que sera colocada no estoque");
-		int quantidade = input.nextInt();
-		
-		Produto produto = new Bebida(nome, valor, tipo,quantidade);
-		produtos.add(produto);
-		System.out.println("cadastro realizado com sucesso!");
-		System.out.println("------------------------------------------------------");
-		System.out.println("-----------Deseja cadastrar outra Bebida?-------------");
-		System.out.println("------------------------------------------------------");
-		System.out.println("Digite 1 para sim e 2 para não e voltar par pagina de cadastro");
-		String opcao1 = input.next();
-		if(opcao1.equals("1")){
-			cadastraBebida();
-			System.out.println("--------------------Obrigado!!!-------------------");
-		}else {
-			System.out.println("__________________________________________________");
-		}
+	    System.out.println("Digite o tipo da bebida");
+	    String tipo = input.next();
+	    System.out.println("Digite a quantidade que será colocada no estoque");
+	    int quantidade = input.nextInt();
+
+	    Produto produto = new Bebida(nome, valor, quantidade, tipo);
+	    produtos.add(produto);
+	    System.out.println("Cadastro realizado com sucesso!");
+	    System.out.println("------------------------------------------------------");
+	    System.out.println("-----------Deseja cadastrar outra Bebida?-------------");
+	    System.out.println("------------------------------------------------------");
+	    System.out.println("Digite 1 para sim e 2 para não e voltar para página de cadastro");
+	    String opcao1 = input.next();
+	    if (opcao1.equals("1")) {
+	        cadastraBebida();
+	        System.out.println("--------------------Obrigado!!!-------------------");
+	    } else {
+	        System.out.println("__________________________________________________");
+	    }
 	}
-	private static void cadastraDoce(){
-		System.out.println("Digite o nome do produto: ");
-		String nome = input.nextLine();
-		System.out.println("Digite O valor do produto: ");
-		String valorStr = input.next();
+
+
+	private static void cadastraDoce() {
+	    System.out.println("Digite o nome do produto: ");
+	    String nome = input.next();
+	    System.out.println("Digite o valor do produto: ");
+	    String valorStr = input.next();
 	    double valor = Double.parseDouble(valorStr);
-		System.out.println("Digite o nome da marca");
-		String marca = input.nextLine();
-		System.out.println("Digite a quantidade que sera colocada no estoque");
-		int quantidade = input.nextInt();
-		Produto produto = new Bebida(nome, valor, marca,quantidade);
-		produtos.add(produto);
-		System.out.println("cadastro realizado com sucesso!");
-		System.out.println("------------------------------------------------------");
-		System.out.println("-----------Deseja cadastrar outro Doce?------------");
-		System.out.println("Digite 1 para sim e 2 para não e voltar par pagina de cadastro");
-		String opcao1 = input.nextLine();
-		if(opcao1.equals("1")){
-			cadastraDoce();
-			System.out.println("--------------------Obrigado!!!-------------------");
-		}else {
-			System.out.println("__________________________________________________");
-		}
+	    input.nextLine(); // Limpa o buffer do scanner
+	    System.out.println("Digite o nome da marca");
+	    String marca = input.nextLine();
+	    System.out.println("Digite a quantidade que será colocada no estoque");
+	    int quantidade = input.nextInt();
+
+	    Produto produto = new Doce(nome, valor, quantidade, marca);
+	    produtos.add(produto);
+	    System.out.println("Cadastro realizado com sucesso!");
+	    System.out.println("------------------------------------------------------");
+	    System.out.println("-----------Deseja cadastrar outro Doce?------------");
+	    System.out.println("Digite 1 para sim e 2 para não e voltar para página de cadastro");
+	    String opcao1 = input.next();
+	    if (opcao1.equals("1")) {
+	        cadastraDoce();
+	        System.out.println("--------------------Obrigado!!!-------------------");
+	    } else {
+	        System.out.println("__________________________________________________");
+	    }
 	}
-	private static void cadastraRevista(){
-		System.out.println("Digite o nome do produto: ");
-		String nome = input.nextLine();
-		System.out.println("Digite O valor do produto: ");
-		String valorStr = input.nextLine();
+
+
+	private static void cadastraRevista() {
+	    System.out.println("Digite o nome do produto: ");
+	    String nome = input.next();
+	    System.out.println("Digite o valor do produto: ");
+	    String valorStr = input.next();
 	    double valor = Double.parseDouble(valorStr);
-		System.out.println("Digite o nome da editora");
-		String editora = input.nextLine();
-		System.out.println("Digite a quantidade que sera colocada no estoque");
-		int quantidade = input.nextInt();
-		Produto produto = new Bebida(nome, valor, editora,quantidade);
-		produtos.add(produto);
-		System.out.println("cadastro realizado com sucesso!");
-		System.out.println("------------------------------------------------------");
-		System.out.println("-----------Deseja cadastrar outro Revista?------------");
-		System.out.println("Digite 1 para sim e 2 para não e voltar par pagina de cadastro");
-		String opcao1 = input.nextLine();
-		if(opcao1.equals("1")){
-			cadastraDoce();
-			System.out.println("--------------------Obrigado!!!-------------------");
-		}else {
-			System.out.println("__________________________________________________");
-		}
+	    input.nextLine(); // Limpa o buffer do scanner
+	    System.out.println("Digite o número da edição");
+	    int numeroEdicao = input.nextInt();
+	    System.out.println("Digite a quantidade que será colocada no estoque");
+	    int quantidade = input.nextInt();
+
+	    Produto produto = new Revista(nome, valor, quantidade, numeroEdicao);
+	    produtos.add(produto);
+	    System.out.println("Cadastro realizado com sucesso!");
+	    System.out.println("------------------------------------------------------");
+	    System.out.println("-----------Deseja cadastrar outra Revista?------------");
+	    System.out.println("Digite 1 para sim e 2 para não e voltar para página de cadastro");
+	    String opcao1 = input.next();
+	    if (opcao1.equals("1")) {
+	        cadastraRevista();
+	        System.out.println("--------------------Obrigado!!!-------------------");
+	    } else {
+	        System.out.println("__________________________________________________");
+	    }
 	}
 
 	private static void listaProdutos(String opcao) {
@@ -216,23 +230,24 @@ public class AppPrincipal {
 			switch (opcao) {
 			case "1":
 				if(produtos instanceof Bebida) {
-					produtos.mostrarItem();
+					produtos.imprimirInformacoes();
+			
 				}
 				break;
 			case "2":
-				if(produtos instanceof Revista) {
-					produtos.mostrarItem();
+				if(produtos instanceof Doce) {
+					produtos.imprimirInformacoes();
 				}
 				
 				break;
 			case "3":
-				if(produtos instanceof Doce) {
-					produtos.mostrarItem();
+				if(produtos instanceof Revista) {
+					produtos.imprimirInformacoes();
 				}
 				
 				break;
 			case "4":
-				produtos.mostrarItem();
+				produtos.imprimirInformacoes();;
 				
 				break;
 			}
@@ -298,9 +313,40 @@ public class AppPrincipal {
 	            break;
 	        }
 	    }
+	    DecimalFormat decimalFormat = new DecimalFormat("#.00");
+	    String valorTotalFormatado = decimalFormat.format(valorTotal);
 
-	    System.out.println("Valor total da compra: R$" + valorTotal);
+	    System.out.println("Valor total da compra: R$" + valorTotalFormatado);
 	    System.out.println("Obrigado pela compra!");
+	    menu();
+	}
+	private static void removerDoCadastro() {
+	    System.out.println("-----------Remover Itens do Cadastro-----------");
+	    System.out.println("Produtos cadastrados:");
+
+	    for (int i = 0; i < produtos.size(); i++) {
+	        Produto produto = produtos.get(i);
+	        System.out.println((i + 1) + ". " + produto.getNome());
+	    }
+
+	    System.out.println("Digite o número do produto que deseja remover (0 para cancelar):");
+	    int opcao = input.nextInt();
+
+	    if (opcao == 0) {
+	        return;
+	    }
+
+	    if (opcao < 1 || opcao > produtos.size()) {
+	        System.out.println("Opção inválida. Tente novamente.");
+	        return;
+	    }
+
+	    Produto produtoRemovido = produtos.remove(opcao - 1);
+	    System.out.println("Produto removido: " + produtoRemovido.getNome());
+	    System.out.println("Produto removido do cadastro.");
+
+	    //volta para o menu
+	    menu();
 	}
 
 
