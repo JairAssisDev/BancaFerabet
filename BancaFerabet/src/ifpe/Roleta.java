@@ -41,7 +41,7 @@ public class Roleta {
 				}else {
 					System.out.println("loss...");
 				}
-				System.out.println("Saldo atual: " + Autenticador.getUsuario().getCarteira().getSaldoFormatado());
+
 			}else {
 				System.out.println("VOCÊ NÃO TEM SALDO SUFICIENTE");
 			}

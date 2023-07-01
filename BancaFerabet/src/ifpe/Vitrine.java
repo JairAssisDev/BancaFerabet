@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Vitrine {
-	public static Map<Produto,Integer> estoque = new HashMap<Produto,Integer>();
+	public static final Map<Produto,Integer> estoque = new HashMap<Produto,Integer>();
 	
 	public static Produto consultar(String nome) {
 		Set<Produto> produtos = estoque.keySet();
@@ -26,11 +26,26 @@ public class Vitrine {
 		}
 		return null;
 	}
-	
+	public static void switchConsultar(int op,String value) {
+		Produto p = null;
+		switch(op) {
+		case 1:
+			p = consultar(value);
+			break;
+		case 2:
+			p = consultar(new Codigo(value));
+		}
+		if(p != null) {
+			System.out.println(apresentarProduto(p));
+		}
+	}
 	
 	private static void adicionar(Produto produto, int qtd) {
 		if(produto != null ) {
-			estoque.put(produto,estoque.get(produto)+qtd);
+			if(qtd > 0) {
+				estoque.put(produto,estoque.get(produto)+qtd);
+			}
+			
 		}
 	}
 	private static void removeAll(Produto produto) {
@@ -41,7 +56,7 @@ public class Vitrine {
 	private static boolean remover(Produto produto, int qtd) {
 		if(produto != null) {
 			int q = estoque.get(produto);
-			if(q >= qtd) {
+			if(q >= qtd && qtd >= 0) {
 				estoque.put(produto,q-qtd);
 				return true;
 			}
@@ -86,18 +101,35 @@ public class Vitrine {
 			}
 		}
 	}
-	public static String apresentarProduto(String nome) {
-		return "Dados do Produto:\n" + consultar(nome).apresentarProduto();
+	
+	private static String apresentarProduto(Produto p) {
+		
+		return "Dados do Produto:\n" + p.apresentarProduto() + "\nQuantidade: "+estoque.get(p);
 	}
-	public static String apresentarProduto(Codigo codigo) {
-		return "Dados do Produto:\n" + consultar(codigo).apresentarProduto();
-	}
-	public static String mostrarVitrine() {
+	public static void mostrarVitrine() {
 		StringBuilder s = new StringBuilder();
 		for(Produto produto : estoque.keySet()) {
-			s.append("=".repeat(20)+"\n" + produto.getCodigo().getValor()+"\n"+produto.apresentarProduto()+"\n"
-					+"Quantidade: " + estoque.get(produto)+"=".repeat(20)+"\n");
+			s.append("=".repeat(20)+"\n[" + produto.getCodigo().getValor()+"]"+produto.apresentarProduto()+"\n"
+					+"Quantidade: " + estoque.get(produto)+"\n"+"=".repeat(20)+"\n");
 		}
-		return s.toString();
+		System.out.println(s.toString());
+	}
+	public static void comprar(String nome, int qtd) {
+		Produto p = consultar(nome) ;
+		if(p != null && qtd > 0) {
+			apresentarProduto(p);
+			double pagar = p.getPreco()*qtd;
+			if(Autenticador.getUsuario().getCarteira().getSaldo() >= pagar) {
+				if(rem(nome,qtd)) {
+					System.out.println("COMPRADO COM SUCESSO!");
+					Autenticador.getUsuario().getCarteira().transferir(Casa.getCarteira(), pagar);
+				}
+				
+			}else {
+				System.out.println("VOCÊ NÃO TEM SALDO SUFICIENTE!");
+			}
+		}else {
+			System.out.println("PRODUTO NÃO EXISTE");
+		}
 	}
 }

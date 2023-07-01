@@ -1,35 +1,30 @@
 package EntidadesProduto;
 
-
-import java.util.List;
-
-import EntidadesJogos.Jogo;
-
 public class Banca {
 	
-	private List<Produto>produtos;
-	private List<Jogo>jogos;
-
-	public Banca(List<Produto> produtos) {
+	private String nome;
+	private Estoque estoque;
+	public Banca(String nome, Estoque estoque) {
 		super();
-		this.produtos = produtos;
+		this.nome = nome;
+		this.estoque = estoque;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Estoque getEstoque() {
+		return estoque;
+	}
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
 	}
 	
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-	public List<Jogo> getJogos() {
-		return jogos;
-	}
-	public void setJogos(List<Jogo> jogos) {
-		this.jogos = jogos;
-	}
 	
-
-	}
+	
+}
 	
 	
 	
