@@ -86,7 +86,7 @@ public class Roleta {
 			}else if(dif == 0) {
 				System.out.println("0-0");
 			}else {
-				System.out.println("PREJUIZO!");
+				System.out.println("PREJUIZO! :(");
 			}
 		}
 		
